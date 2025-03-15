@@ -1,6 +1,6 @@
 # Threat Intelligence Aggregator
 
-A cybersecurity threat intelligence tool built with Agno that automatically aggregates and summarizes recent threat data from multiple sources.
+A cyber security threat intelligence AI agent tool that automatically aggregates and summarizes recent data threats across web, Twitter and threat intelligence feeds.
 
 ## Overview
 
