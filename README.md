@@ -26,6 +26,27 @@ The collected data is combined into a comprehensive threat intelligence report w
 - PostgreSQL database or SQLite (UI version supports both)
 - Agno framework and its dependencies (see requirements.txt)
 - Streamlit (for the UI version)
+- EXA API key (for web search capabilities)
+
+## API Keys Setup
+
+### EXA API Key
+The tool uses EXA (a powerful search engine API that provides comprehensive web search capability) for web searches and threat intelligence gathering. You need to obtain an API key:
+
+1. Sign up for an API key at [EXA's website](https://exa.ai)
+2. Set up the API key in one of the following ways:
+   - Set as an environment variable:
+     ```bash
+     export EXA_API_KEY=your_api_key_here
+     ```
+   - For the UI version, enter the API key directly in the Streamlit interface
+   
+Without a valid EXA API key, the web search functionality will not work, limiting the tool's ability to gather real-time threat intelligence.
+
+### Gemini API Key
+For the LLM functionality:
+1. Obtain a Gemini API key from [Google AI Studio](https://ai.google.dev/)
+2. Provide it when using the tool (UI version) or set it in your environment
 
 ## Setup
 
@@ -103,6 +124,11 @@ If you get import errors related to `exa_py`, make sure to install it with:
 ```
 pip install exa_py
 ```
+
+### API Key Issues
+If you see search-related errors, verify that:
+- Your EXA API key is correctly set in the environment or UI
+- The API key is valid and has sufficient quota remaining
 
 ## License
 
