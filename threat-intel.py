@@ -1,5 +1,5 @@
 from agno.agent import Agent
-from agno.models.google import Gemini  # Gemini as LLM
+from agno.models.google import Gemini  
 from agno.tools.exa import ExaTools
 from agno.storage.agent.postgres import PostgresAgentStorage
 from datetime import datetime
@@ -8,7 +8,7 @@ import getpass
 
 # Database setup with system user
 DB_USER = getpass.getuser()  # Gets current system username
-DB_PASS = ""  # No password for local development
+DB_PASS = ""  
 DB_HOST = "localhost"
 DB_PORT = "5432"
 DB_NAME = "agno"
@@ -29,7 +29,7 @@ storage = PostgresAgentStorage(
 # Agent 1: Web Search Agent
 web_agent = Agent(
     name="WebSearchAgent",
-    model=Gemini(id="gemini-2.0-flash"),  # Assuming this is the correct Gemini ID
+    model=Gemini(id="gemini-2.0-flash"),  
     tools=[ExaTools()],
     instructions=[
         "Search the web for cybersecurity threat reports from the last 7 days.",
@@ -49,14 +49,14 @@ x_agent = Agent(
         "Cover a range of threats, not limited to a single group.",
         "Return findings in concise markdown format with timestamps and usernames."
     ],
-    show_tool_calls=False,  # Clean output
+    show_tool_calls=False, 
     markdown=True
 )
 # Agent 3: Feed Reader Agent
 feed_agent = Agent(
     name="FeedReaderAgent",
     model=Gemini(id="gemini-2.0-flash"),
-    tools=[ExaTools()],  # Fallback to search if direct fetch isn't supported
+    tools=[ExaTools()],  
     instructions=[
         "Search for recent cybersecurity updates from NVD (nvd.nist.gov) and US-CERT (cisa.gov).",
         f"Alternatively, if you can fetch directly, retrieve content from: {', '.join(FEEDS.values())}.",
