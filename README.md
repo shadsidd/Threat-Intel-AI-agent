@@ -15,17 +15,15 @@ The collected data is combined into a comprehensive threat intelligence report w
 
 - **Multi-source intelligence gathering**: Collects data from web searches, social media, and official feeds
 - **Automated analysis**: AI-powered summarization and categorization
-- **Persistent storage**: Maintains session history in PostgreSQL or SQLite
+- **Persistent storage**: Maintains session history in PostgreSQL
 - **Markdown formatting**: Clean, readable reports
 - **Customizable focus**: Can be configured to focus on specific threat groups or broad overviews
-- **Interactive UI**: A Streamlit-based user interface for easier configuration and visualization
 
 ## Requirements
 
 - Python 3.8+
-- PostgreSQL database or SQLite (UI version supports both)
+- PostgreSQL database
 - Agno framework and its dependencies (see requirements.txt)
-- Streamlit (for the UI version)
 - EXA API key (for web search capabilities)
 
 ## API Keys Setup
@@ -34,19 +32,20 @@ The collected data is combined into a comprehensive threat intelligence report w
 The tool uses EXA (a powerful search engine API that provides comprehensive web search capability) for web searches and threat intelligence gathering. You need to obtain an API key:
 
 1. Sign up for an API key at [EXA's website](https://exa.ai)
-2. Set up the API key in one of the following ways:
-   - Set as an environment variable:
-     ```bash
-     export EXA_API_KEY=your_api_key_here
-     ```
-   - For the UI version, enter the API key directly in the Streamlit interface
+2. Set up the API key as an environment variable:
+   ```bash
+   export EXA_API_KEY=your_api_key_here
+   ```
    
 Without a valid EXA API key, the web search functionality will not work, limiting the tool's ability to gather real-time threat intelligence.
 
 ### Gemini API Key
 For the LLM functionality:
 1. Obtain a Gemini API key from [Google AI Studio](https://ai.google.dev/)
-2. Provide it when using the tool (UI version) or set it in your environment
+2. Set as an environment variable:
+   ```bash
+   export GOOGLE_API_KEY=your_api_key_here
+   ```
 
 ## Setup
 
@@ -55,13 +54,10 @@ For the LLM functionality:
    pip install -r requirements.txt
    ```
 
-2. Set up database:
-   - For PostgreSQL:
-     - Install PostgreSQL if not already installed
-     - Create a database named 'agno'
-     - The script uses your system username with no password for local development
-   - For SQLite (UI version only):
-     - No setup required, just specify a path for the database file
+2. Set up PostgreSQL database:
+   - Install PostgreSQL if not already installed
+   - Create a database named 'agno'
+   - The script uses your system username with no password for local development
 
 3. Configure the script (optional):
    - Update database credentials if needed
@@ -70,8 +66,6 @@ For the LLM functionality:
 
 ## Usage
 
-### Command Line Version
-
 Run the script to generate a threat intelligence report:
 
 ```
@@ -79,22 +73,6 @@ python threat-intel.py
 ```
 
 The script will execute the agents, collect intelligence, and output a formatted report.
-
-### Interactive UI Version
-
-Run the Streamlit app for an interactive experience:
-
-```
-streamlit run threat-intel-2.py
-```
-
-The Streamlit UI provides:
-- Model selection dropdown
-- API key input
-- Database configuration options (PostgreSQL or SQLite)
-- Custom search queries
-- Option to focus on specific threat actors
-- Tabbed interface for viewing results
 
 ## Customization
 
@@ -116,9 +94,6 @@ response = summary_agent.print_response(
 
 ## Troubleshooting
 
-### Architecture Issues
-If you encounter PostgreSQL architecture compatibility issues on Apple Silicon Macs, use the UI version and select SQLite as the storage option.
-
 ### Package Installation
 If you get import errors related to `exa_py`, make sure to install it with:
 ```
@@ -127,8 +102,14 @@ pip install exa_py
 
 ### API Key Issues
 If you see search-related errors, verify that:
-- Your EXA API key is correctly set in the environment or UI
+- Your EXA API key is correctly set in the environment
 - The API key is valid and has sufficient quota remaining
+
+### PostgreSQL Connection Issues
+If you encounter PostgreSQL connection errors:
+- Ensure PostgreSQL is running
+- Verify the username, password, host, port, and database name
+- Check if the PostgreSQL client libraries are installed
 
 ## License
 
