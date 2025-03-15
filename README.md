@@ -15,15 +15,15 @@ The collected data is combined into a comprehensive threat intelligence report w
 
 - **Multi-source intelligence gathering**: Collects data from web searches, social media, and official feeds
 - **Automated analysis**: AI-powered summarization and categorization
-- **Persistent storage**: Maintains session history in PostgreSQL
+- **Persistent storage**: Maintains session history in PostgreSQL or SQLite
 - **Markdown formatting**: Clean, readable reports
 - **Customizable focus**: Can be configured to focus on specific threat groups or broad overviews
-- **Interactive UI**: A Streamlit-based user interface for easier configuration and visualization (threat-intel-2.py)
+- **Interactive UI**: A Streamlit-based user interface for easier configuration and visualization
 
 ## Requirements
 
 - Python 3.8+
-- PostgreSQL database
+- PostgreSQL database or SQLite (UI version supports both)
 - Agno framework and its dependencies (see requirements.txt)
 - Streamlit (for the UI version)
 
@@ -34,10 +34,13 @@ The collected data is combined into a comprehensive threat intelligence report w
    pip install -r requirements.txt
    ```
 
-2. Set up PostgreSQL database:
-   - Install PostgreSQL if not already installed
-   - Create a database named 'agno'
-   - The script uses your system username with no password for local development
+2. Set up database:
+   - For PostgreSQL:
+     - Install PostgreSQL if not already installed
+     - Create a database named 'agno'
+     - The script uses your system username with no password for local development
+   - For SQLite (UI version only):
+     - No setup required, just specify a path for the database file
 
 3. Configure the script (optional):
    - Update database credentials if needed
@@ -67,7 +70,7 @@ streamlit run threat-intel-2.py
 The Streamlit UI provides:
 - Model selection dropdown
 - API key input
-- Database configuration options
+- Database configuration options (PostgreSQL or SQLite)
 - Custom search queries
 - Option to focus on specific threat actors
 - Tabbed interface for viewing results
@@ -90,6 +93,17 @@ response = summary_agent.print_response(
 )
 ```
 
+## Troubleshooting
+
+### Architecture Issues
+If you encounter PostgreSQL architecture compatibility issues on Apple Silicon Macs, use the UI version and select SQLite as the storage option.
+
+### Package Installation
+If you get import errors related to `exa_py`, make sure to install it with:
+```
+pip install exa_py
+```
+
 ## License
 
 ```
@@ -97,7 +111,7 @@ response = summary_agent.print_response(
                            Version 2.0, January 2004
                         http://www.apache.org/licenses/
 
-   Copyright 2024 [Your Name/Organization]
+   Copyright 2024 Shadab Siddiqui
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -112,4 +126,4 @@ response = summary_agent.print_response(
    limitations under the License.
 ```
 
-This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the Apache License 2.0.
